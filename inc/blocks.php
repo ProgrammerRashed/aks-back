@@ -437,30 +437,25 @@ function headless_register_components()
 
 
                     // News Hero
-                    Block::make(__('News Hero', 'nh'))
-                    ->add_fields(array(
-                        Field::make('html', 'crb_information_text')
-                            ->set_html('<h2>News Hero Block</h2>'),
-                        Field::make('text', 'title', __('Title', 'nh')),
-                        Field::make('complex', 'items', __('Select Items', 'nh'))
-                            ->set_layout('tabbed-horizontal')
-                            ->add_fields(array(
-                                Field::make('association', 'selected_blogs', __('Select Blogs', 'nh'))
+                            Block::make(__('News Hero', 'nh'))
+                            ->add_fields([
+                                Field::make('html', 'crb_information_text')
+                                ->set_html('<h2>News Hero Block</h2>'),
+                                Field::make('text', 'title', __('Title', 'nh')),
+                                Field::make('association', 'news', __('Select News', 'nh'))
                                     ->set_types([
                                         [
                                             'type' => 'post',
-                                            'post_type' => 'posts',
+                                            'post_type' => 'posts', 
                                         ],
                                     ])
-                                    ->set_max(1)
-                                    ->set_help_text(__('Select a blog post to display in this section.', 'nh')),
-                            )),
-                    ))
-                    ->set_icon('star-filled')
-                    ->set_keywords([__('News Hero Custom Block', 'nh')])
-                    ->set_description(__('Custom Block', 'nh'))
-                    ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-                    }),
+                                    ->set_max(10) // Limit the number of projects that can be selected
+                                    ->set_help_text(__('Select news to display in this section.', 'nh')),
+                            ])
+                            ->set_icon('grid-view') // You can choose an appropriate icon here
+                            ->set_keywords([__('News Hero Section Block', 'nh')])
+                            ->set_description(__('Custom Block for News Hero Section', 'nh'))
+                            ->set_render_callback(function ($fields, $attributes, $inner_blocks) {}),
 
                             // News Hero
                             Block::make(__('News Container', 'nh'))
