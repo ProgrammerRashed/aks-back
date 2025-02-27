@@ -446,7 +446,7 @@ function headless_register_components()
                                     ->set_types([
                                         [
                                             'type' => 'post',
-                                            'post_type' => 'posts', 
+                                            'post_type' => 'post', 
                                         ],
                                     ])
                                     ->set_max(10) // Limit the number of projects that can be selected

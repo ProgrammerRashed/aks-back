@@ -47,14 +47,6 @@ function Postmeta()
         Field::make('file', 'pdf_file', __('Upload Document', 'nh'))
         ->set_value_type('url')
     )));
-    
-
-    WpGraphQLCrbContainer::register(
-    Container::make('post_meta', 'Banner')
-    ->where('post_type', '=', 'post')
-    ->add_fields(array(
-        Field::make('image', 'banner_image', 'Image')->set_value_type('url'),
-    )));
 }
 
 add_action('carbon_fields_register_fields', 'Postmeta');
