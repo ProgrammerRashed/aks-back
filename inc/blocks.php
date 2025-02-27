@@ -71,12 +71,12 @@ function headless_register_components()
             ->add_fields(array(
                 Field::make('html', 'crb_information_text')
                     ->set_html('<h2>Mission Vision Block</h2>'),
-
                 Field::make('text', 'section_title', __('Section Title', 'nh')),
-                Field::make('text', 'mission_title', __('Mission Title', 'nh')),
-                Field::make('text', 'mission_description', __('Mission Description', 'nh')),
-                Field::make('text', 'vision_title', __('Vision Title', 'nh')),
-                Field::make('text', 'vision_description', __('Vision Description', 'nh')),
+                Field::make('complex', 'mission_vision_items', __('Mission Vision Items', 'nh'))
+                ->set_layout('tabbed-horizontal')
+                ->add_fields(array(
+                    Field::make('text', 'mission_vision_item', __('Mission Vision Item', 'nh')),
+                ))
                 Field::make('file', 'image', __('Image'))
                     ->set_value_type('url'),
 
