@@ -437,27 +437,30 @@ function headless_register_components()
 
 
                     // News Hero
-        Block::make(__('News Hero', 'nh'))
-        ->add_fields(array(
-            // add html field to display information in the admin
-            Field::make('html', 'crb_information_text')
-                ->set_html('<h2>News Hero Block</h2>'),
-            Field::make('text', 'title', __('Title', 'nh')),
-            // add multt select field of recent blog posts
-            Field::make('complex', 'items', __('Select Items', 'nh'))
-                ->set_layout('tabbed-horizontal')
-                ->add_fields(array(
-                    Field::make("select", "selected_blogs", "Select Blogs")
-                    ->set_options(getRecentBlogPosts()),
-                )),
-        ))
-
-        ->set_icon('star-filled')
-        ->set_keywords([__('News Hero Custom Block', 'nh')])
-        ->set_description(__('Custom Block', 'nh'))
-        ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
-        }),
-
+                    Block::make(__('News Hero', 'nh'))
+                    ->add_fields(array(
+                        Field::make('html', 'crb_information_text')
+                            ->set_html('<h2>News Hero Block</h2>'),
+                        Field::make('text', 'title', __('Title', 'nh')),
+                        Field::make('complex', 'items', __('Select Items', 'nh'))
+                            ->set_layout('tabbed-horizontal')
+                            ->add_fields(array(
+                                Field::make('association', 'selected_blogs', __('Select Blogs', 'nh'))
+                                    ->set_types([
+                                        [
+                                            'type' => 'post',
+                                            'post_type' => 'posts',
+                                        ],
+                                    ])
+                                    ->set_max(1)
+                                    ->set_help_text(__('Select a blog post to display in this section.', 'nh')),
+                            )),
+                    ))
+                    ->set_icon('star-filled')
+                    ->set_keywords([__('News Hero Custom Block', 'nh')])
+                    ->set_description(__('Custom Block', 'nh'))
+                    ->set_render_callback(function ($fields, $attributes, $inner_blocks) {
+                    }),
 
                             // News Hero
                             Block::make(__('News Container', 'nh'))
