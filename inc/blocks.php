@@ -418,15 +418,15 @@ function headless_register_components()
                 Field::make('text', 'btn_title', __('Button Title', 'nh')),
                 Field::make('text', 'btn_url', __('Button URL', 'nh')),
                 Field::make('text', 'section_classname', __('Section Classname', 'nh')),
-                Field::make('association', 'items', __('Select blogs', 'nh'))
-                ->set_types([
-                    [
-                        'type' => 'post',
-                        'post_type' => 'post', 
-                    ],
-                ])
-                ->set_max(10) // Limit the number of projects that can be selected
-                ->set_help_text(__('Select blogs to display in this section.', 'nh')),
+                Field::make('association', 'news', __('Select News', 'nh'))
+                            ->set_types([
+                                [
+                                    'type' => 'post',
+                                    'post_type' => 'post', 
+                                ],
+                            ])
+                            ->set_max(10) // Limit the number of projects that can be selected
+                            ->set_help_text(__('Select news to display in this section.', 'nh')),
             ))
 
             ->set_icon('star-filled')
