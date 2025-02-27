@@ -1,0 +1,11 @@
+{
+	services {
+		nodes {
+			title
+			blocks {
+				name
+				attributesJSON
+			}
+		}
+	}
+}

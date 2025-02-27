@@ -1,0 +1,10 @@
+{
+	page(id: "front-page", idType: URI) {
+		id
+		title
+		blocks {
+			name
+			attributesJSON
+		}
+	}
+}

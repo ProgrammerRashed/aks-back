@@ -1,0 +1,11 @@
+{
+	caseStudies {
+		nodes {
+			title
+			blocks {
+				name
+				attributesJSON
+			}
+		}
+	}
+}
