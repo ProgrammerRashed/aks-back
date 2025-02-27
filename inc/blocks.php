@@ -418,13 +418,15 @@ function headless_register_components()
                 Field::make('text', 'btn_title', __('Button Title', 'nh')),
                 Field::make('text', 'btn_url', __('Button URL', 'nh')),
                 Field::make('text', 'section_classname', __('Section Classname', 'nh')),
-                // add multt select field of recent blog posts
-                Field::make('complex', 'items', __('Items', 'nh'))
-                    ->set_layout('tabbed-horizontal')
-                    ->add_fields(array(
-                        Field::make("select", "selected_blogs", "Select Blogs")
-                        ->set_options(getRecentBlogPosts()),
-                    )),
+                Field::make('association', 'news', __('Select News', 'nh'))
+                ->set_types([
+                    [
+                        'type' => 'post',
+                        'post_type' => 'post', 
+                    ],
+                ])
+                ->set_max(10) // Limit the number of projects that can be selected
+                ->set_help_text(__('Select news to display in this section.', 'nh')),
             ))
 
             ->set_icon('star-filled')
