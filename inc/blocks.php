@@ -396,12 +396,14 @@ function headless_register_components()
                   Field::make('text', 'title', __('Title', 'nh')),
                   Field::make('text', 'section_classnames', __('Section Classnames', 'nh')),
                   Field::make('text', 'inner_section_classnames', __('Inner Section Classnames', 'nh')),
-                  Field::make('radio', 'memebers_type', __('Select Members', 'nh')) 
-                      ->add_options(array(
-                          'board-of-director' => __('Board of Director', 'nh'),
-                          'management-team' => __('Management Team', 'nh'),
-                          'doctors' => __('Doctors', 'nh'),
-                      )),
+                  Field::make('association', 'members', __('Select Members', 'nh'))
+                  ->set_types([
+                      [
+                          'type' => 'post',
+                          'post_type' => 'members', 
+                      ],
+                  ])
+                  ->set_help_text(__('Select Members to display in this section.', 'nh')),
               ))
               ->set_icon('star-filled')
               ->set_keywords([__('Members Custom Block', 'nh')])
