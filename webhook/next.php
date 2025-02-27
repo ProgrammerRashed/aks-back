@@ -11,7 +11,7 @@ function my_post_action_callback($post_id, $post, $update) {
     if (!$post_url) return;
 
     // Webhook URL with secret key
-    $webhook_url = "https://headless-frontend-one.vercel.app/api/revalidate?secret=12345678";
+    $webhook_url = "https://staging.akskhanpharma.com/api/revalidate?secret=12345678";
 
     // Send a POST request to the Next.js revalidation API
     $response = wp_remote_post($webhook_url, array(
