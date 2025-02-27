@@ -76,7 +76,7 @@ function headless_register_components()
                 ->set_layout('tabbed-horizontal')
                 ->add_fields(array(
                     Field::make('text', 'mission_vision_item', __('Mission Vision Item', 'nh')),
-                ))
+                )),
                 Field::make('file', 'image', __('Image'))
                     ->set_value_type('url'),
 
