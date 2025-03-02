@@ -655,6 +655,15 @@ function headless_register_components()
                 ->set_html('<h2>Contact Us Block</h2>'),
             Field::make('text', 'title', __('Title', 'nh')),
             Field::make('text', 'sub_title', __('Sub Title', 'nh')),
+            Field::make('text', 'card_section_title', __('Card Section Title', 'nh')),
+            Field::make('complex', 'card_items', __('Card Items', 'nh'))
+            ->set_layout('tabbed-horizontal')
+            ->add_fields(array(
+                Field::make('file', 'icon', __('Icon'))
+                    ->set_value_type('url'),
+                Field::make('text', 'card_title', __('Card Title', 'nh')),
+                Field::make('text', 'card_number', __('Card Number', 'nh')),
+            ))
         
         ))
         ->set_icon('star-filled')
