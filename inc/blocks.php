@@ -293,6 +293,8 @@ function headless_register_components()
                 Field::make('text', 'description', __('Description', 'nh')),
                 Field::make('text', 'cta_description', __('CTA Description', 'nh')),
                 Field::make('text', 'cta_url', __('CTA URL', 'nh')),
+                Field::make('file', 'image', __('Image'))
+                ->set_value_type('url'),
                 Field::make('radio', 'page', __('Select Page', 'nh')) 
                 ->add_options(array(
                     'homepage' => __('Homepage', 'nh'),
