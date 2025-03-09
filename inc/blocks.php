@@ -74,7 +74,6 @@ function headless_register_components()
                 Field::make('text', 'section_title', __('Section Title', 'nh')),
                 Field::make('complex', 'diagnostics_items', __('Diagnostics Card Items', 'nh'))
                 ->set_layout('tabbed-horizontal')
-                
                 ->add_fields(array(
                     Field::make('text', 'card_title', __('Card Title', 'nh')),
                     Field::make('text', 'card_sub_title', __('Card Sub Title', 'nh')),
@@ -87,6 +86,28 @@ function headless_register_components()
             ))
             ->set_icon('star-filled')
             ->set_keywords([__('Diagnostics Cards Custom Block', 'nh')])
+            ->set_description(__('Custom Block', 'nh'))
+            ->set_render_callback(function ($fields, $attributes, $inner_blocks) {}),
+
+
+        // Mission Vission Blcok 
+        Block::make(__('Mission Vision', 'nh'))
+            ->add_fields(array(
+                Field::make('html', 'crb_information_text')
+                    ->set_html('<h2>Mission Vision Section Block</h2>'),
+                Field::make('text', 'section_title', __('Section Title', 'nh')),
+                Field::make('file', 'image', __('Image'))
+                ->set_value_type('url'),
+                Field::make('complex', 'mission_vision_items', __('Mission Vision Card Items', 'nh'))
+                ->set_layout('tabbed-horizontal')
+                ->add_fields(array(
+                    Field::make('text', 'mission_vision_item', __('Item', 'nh')),
+                )),
+              
+
+            ))
+            ->set_icon('star-filled')
+            ->set_keywords([__('Mission Cards Custom Block', 'nh')])
             ->set_description(__('Custom Block', 'nh'))
             ->set_render_callback(function ($fields, $attributes, $inner_blocks) {}),
 
