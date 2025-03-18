@@ -322,6 +322,7 @@ function headless_register_components()
                     'service' => __('Pharmacy Page', 'nh'),
                     'diagnostics' => __('Diagnostics Page', 'nh'),
                 )),
+                Field::make('text', 'outlet_section_title', __('Outlet Section Title', 'nh')),
             ))
             ->set_icon('star-filled')
             ->set_keywords([__('Coverge Custom Block', 'nh')])
