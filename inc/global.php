@@ -159,3 +159,76 @@ function add_graphql_support_to_posts($args, $post_type)
 }
 add_filter('register_post_type_args', 'add_graphql_support_to_posts', 10, 2);
 
+function my_theme_customize_register( $wp_customize ) {
+    $wp_customize->add_section( 'sticky_popup_section', array(
+        'title'    => __('Sticky Popup Settings', 'theme_text_domain'),
+        'priority' => 30,
+    ));
+
+    // Checkbox to enable/disable popup
+    $wp_customize->add_setting( 'enable_sticky_popup', array(
+        'default'   => true,
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control( 'enable_sticky_popup', array(
+        'label'    => __('Enable Sticky Popup', 'theme_text_domain'),
+        'section'  => 'sticky_popup_section',
+        'type'     => 'checkbox',
+    ));
+}
+add_action( 'customize_register', 'my_theme_customize_register' );
+
+
+// Add text input for popup message
+$wp_customize->add_setting( 'popup_text', array(
+    'default'   => 'Discover our upcoming launch at Diagnostic center in Sylhet',
+    'transport' => 'refresh',
+));
+
+$wp_customize->add_control( 'popup_text', array(
+    'label'    => __('Popup Text', 'theme_text_domain'),
+    'section'  => 'sticky_popup_section',
+    'type'     => 'text',
+));
+
+// Add URL input for the link
+$wp_customize->add_setting( 'popup_link', array(
+    'default'   => '#', 
+    'transport' => 'refresh',
+));
+
+$wp_customize->add_control( 'popup_link', array(
+    'label'    => __('Popup Link', 'theme_text_domain'),
+    'section'  => 'sticky_popup_section',
+    'type'     => 'url',
+));
+
+
+// Register Custom Settings in GraphQL
+function register_sticky_popup_settings_in_graphql() {
+    // Register the sticky popup setting
+    register_graphql_field( 'RootQuery', 'stickyPopupEnabled', [
+        'type'    => 'Boolean',
+        'resolve' => function() {
+            return get_theme_mod( 'enable_sticky_popup', true ); // Get the setting from customizer
+        }
+    ] );
+
+    // Register the popup text
+    register_graphql_field( 'RootQuery', 'stickyPopupText', [
+        'type'    => 'String',
+        'resolve' => function() {
+            return get_theme_mod( 'popup_text', 'Discover our upcoming launch at Diagnostic center in Sylhet' );
+        }
+    ] );
+
+    // Register the popup link
+    register_graphql_field( 'RootQuery', 'stickyPopupLink', [
+        'type'    => 'String',
+        'resolve' => function() {
+            return get_theme_mod( 'popup_link', '#' ); // Default link
+        }
+    ] );
+}
+add_action( 'graphql_register_types', 'register_sticky_popup_settings_in_graphql' );
