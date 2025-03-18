@@ -319,23 +319,9 @@ function headless_register_components()
                 Field::make('radio', 'page', __('Select Page', 'nh')) 
                 ->add_options(array(
                     'homepage' => __('Homepage', 'nh'),
-                    'service' => __('Service Page', 'nh'),
+                    'service' => __('Pharmacy Page', 'nh'),
                     'diagnostics' => __('Diagnostics Page', 'nh'),
                 )),
-                Field::make('complex', 'districts', __('Districts', 'nh'))
-                    ->set_layout('tabbed-horizontal')
-                    ->add_fields(array(
-                        Field::make('text', 'title', __('Title', 'nh')),
-                        Field::make('complex', 'offices', __('Offices', 'nh'))
-                            ->set_layout('tabbed-horizontal')
-                            ->add_fields(array(
-                                Field::make('text', 'title', __('Title', 'nh')),
-                                Field::make('text', 'address', __('Address', 'nh')),
-                                Field::make('text', 'email', __('Email', 'nh')),
-                                Field::make('text', 'phone', __('Phone', 'nh')),
-                            )),
-                    )),
-
             ))
             ->set_icon('star-filled')
             ->set_keywords([__('Coverge Custom Block', 'nh')])
