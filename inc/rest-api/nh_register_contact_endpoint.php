@@ -27,7 +27,7 @@ add_action('rest_api_init', 'nh_register_contact_endpoint');
     }
 
     // Get the admin email
-    $admin_email = "rashed@notionhive.com";
+    $admin_email = carbon_get_theme_option('reply_email') ?? "info@akskhanpharma.com";
 
     // Get the user's email
     $user_email = isset($params['email']) ? sanitize_email($params['email']) : '';
@@ -56,12 +56,21 @@ add_action('rest_api_init', 'nh_register_contact_endpoint');
                     "Inquiry: $inquiry\n" .
                     "Message: $message";
 
+    //HEADER FOR ADMIN 
+    $admin_headers = array();
+    if (!empty($user_email)) {
+        $admin_headers[] = 'Reply-To: ' . $user_email;
+    }
+    //HEADER FOR USER 
+    $user_headers = array();
+    if (!empty($user_email)) {
+        $user_headers[] = 'Reply-To: ' . $admin_email;
+    }
     // Send email to the admin
-    wp_mail($admin_email, $admin_subject, $admin_message);
-
+  wp_mail($admin_email, $admin_subject, $admin_message, $admin_headers);
     // Send email to the user (if their email is provided)
     if (!empty($user_email)) {
-        wp_mail($user_email, $user_subject, $user_message);
+        wp_mail($user_email, $user_subject, $user_message, $user_headers);
     }
 
     return new WP_REST_Response(array(

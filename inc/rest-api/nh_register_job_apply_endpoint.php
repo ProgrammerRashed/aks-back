@@ -61,9 +61,10 @@ add_action('rest_api_init', 'nh_register_job_apply_endpoint');
                 'message' => 'Failed to process the uploaded file.',
             ], 500);
         }
-
+        // Get the admin email
+        $admin_email = carbon_get_theme_option('reply_email') ?? "info@akskhanpharma.com";
         // Prepare email details
-        $to = 'rashed@notionhive.com'; // Admin's email address
+        $to = $admin_email; // Admin's email address
         $subject = "New Job Application for $job_title";
         $body = "A new job application has been submitted for :$job_title position\n\n";
         $body .= "First Name: $firstName\n";
@@ -73,7 +74,15 @@ add_action('rest_api_init', 'nh_register_job_apply_endpoint');
 
         // Attach the properly named file
         $attachments = [$tempFilePath];
-        $headers = ['Content-Type: text/plain; charset=UTF-8'];
+        $headers = [
+            'Content-Type: text/plain; charset=UTF-8',
+            "Reply-To: $email", // Reply to the applicant
+        ];
+
+        $user_headers = [
+            'Content-Type: text/plain; charset=UTF-8',
+            "Reply-To: $admin_email", // Reply to the company
+        ];
 
         //Email from User
         $user_email = $email;
@@ -82,11 +91,10 @@ add_action('rest_api_init', 'nh_register_job_apply_endpoint');
 
         // Send the email
         $sent = wp_mail($to, $subject, $body, $headers, $attachments);
-        if ($sent) {
-            wp_mail($user_email, $user_email_subject, $user_message, $headers);
-        };
+
         // Remove the temporary file after sending the email
         if ($sent) {
+            wp_mail($user_email, $user_email_subject, $user_message, $user_headers);
             unlink($tempFilePath);
         } else {
             return new WP_REST_Response([

@@ -703,6 +703,7 @@ function headless_register_components()
         Container::make('theme_options', __('Theme Options'))
             ->add_fields(array(
                 Field::make('text', 'title', __('Title', 'nh')),
+                Field::make('text', 'reply_email', __('Set Reply Email', 'nh')),
                 Field::make('text', 'url', __('URL', 'nh')),
                 Field::make('checkbox', 'display_popup', 'Display Popup')
                 ->set_option_value('true'),
